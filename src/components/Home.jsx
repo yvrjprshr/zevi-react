@@ -5,7 +5,9 @@ import DisplayAll from "./DisplayAll";
 
 function Home() {
   const [dataArray, setDataArray] = useState([]);
-
+  const handleDataArray = (data) => {
+    setDataArray(data);
+  };
   useEffect(() => {
     const x = () => {
       const data_items = [];
@@ -20,6 +22,7 @@ function Home() {
           desc:  faker.commerce.productDescription(),
           productMaterial:  faker.commerce.productMaterial(),
           img: faker.image.urlLoremFlickr({category: 'shirts'}),
+          isFav: i%2===0?false:true,
         };
         data_items.push(obj);
       }
@@ -31,7 +34,7 @@ function Home() {
 
   return <div>
 
-    { dataArray.length===0? <div>hi</div>: <DisplayAll dataArray={dataArray}/>}
+    { dataArray.length===0? <div>hi</div>: <DisplayAll dataArray={dataArray} handleDataArray={handleDataArray}/>}
   </div>;
 }
 
